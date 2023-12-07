@@ -1,15 +1,13 @@
 package com.spring.sExam.vo;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 //@Getter
 //@Setter
 //@ToString
 
 @Data
+
 public class BTomVO {
 	private String name;
 	private int age;

@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>c1.jsp</title>
+	<jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
 <p><br/></p>
@@ -25,6 +26,12 @@
 		<div><img src="${ctp}/test/3.png" width="150px" />()</div>
 		<div><img src="${ctp}/test/4.png" width="150px" />()</div>
 </div>
+<hr/>
+  <p>
+  	<a href="${ctp}/" class="btn btn-warning">Home으로</a> |
+  	<a href="${ctp}/c1Service" class="btn btn-info">c1으로</a> |
+  	<a href="${ctp}/c1Service2" class="btn btn-info">c2으로</a>
+  </p>
 <p><br/></p>
 </body>
 </html>

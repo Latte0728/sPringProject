@@ -50,6 +50,12 @@
   	<a href="${ctp}/btom/b5" class="btn btn-success">b5 호출</a>
   	<a href="${ctp}/btom/b6" class="btn btn-primary">b6 호출</a>
   	<a href="${ctp}/btom/b7" class="btn btn-success">b7 호출</a>
+  	<a href="${ctp}/btom/b8" class="btn btn-primary">b8 호출</a>
+  </p>
+  <hr/>
+  <p>
+  	<a href="${ctp}/ctom/c1" class="btn btn-primary">c1 호출</a>
+  	<a href="${ctp}/ctom/c2" class="btn btn-success">c2 호출</a>
   </p>
 </div>  	
 </body>
