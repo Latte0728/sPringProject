@@ -31,6 +31,7 @@
 	</servlet-mapping>
 	
 	<!-- 한글처리(필터적용) - AOP -->
+	
 	<filter>
 	  <filter-name>encoding</filter-name>
 	  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

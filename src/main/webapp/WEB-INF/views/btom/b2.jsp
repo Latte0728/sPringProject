@@ -29,8 +29,9 @@
 		<hr/>
 		<div>
 			
-			<form  method="post" >
-				<div>성명 : <input type="text" name="name" value="${ctp}/" class="form-control" /></div>
+			<!-- <form  method="post" acton="b2Ok"> -->
+				<form method="post">
+				<div>성명 : <input type="text" name="name" class="form-control" /></div>
 				<div>나이 : <input type="number" name="age"  value="20" min="0" max="99"  class="form-control mb-2" /></div>
 				<div>나이 : <input type="submit" value="전송"  class="btn btn-info" /></div>
 			</form>

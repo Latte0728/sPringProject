@@ -12,7 +12,13 @@
 <p><br/></p>
 <div class="container">
   <h2>이곳은 btom폴더의 b4.jsp 입니다.</h2>
-  <div><a href="b4/btom" class="btn btn-info">b4호출</a></div>
+  <!-- <div><a href="b4Path/btom" class="btn btn-info">b4호출</a></div> -->
+  <!-- <div><a href="b4Path/btom/23" class="btn btn-info">b4호출</a></div> -->
+  <!-- <div><a href="b4Path/btom/23/test" class="btn btn-info">b4호출</a></div> -->
+  <div><a href="b4Path/btom-23/test" class="btn btn-info">b4호출</a></div>
+  <!-- <div><a href="btom/b4" class="btn btn-info">b4호출</a></div> -->
+  <!-- 404 에러 원인 a href="btom/b4" -->
+  
 	<hr/>
 	<div>
 	  <c:if test="${!empty name && !empty age}">넘어온 값 : 

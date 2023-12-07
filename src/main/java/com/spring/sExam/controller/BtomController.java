@@ -1,11 +1,11 @@
 package com.spring.sExam.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.core.style.DefaultValueStyler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,69 +18,58 @@ import com.spring.sExam.vo.BTomVO;
 @Controller
 @RequestMapping("/btom")
 public class BtomController {
-	
-	
-	@RequestMapping(value="/b1", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/b1", method = RequestMethod.GET)
 	public String b1Get() {
-	return "btom/b1";
-	// jsp가 subfix로 예약 되어있다, 따라서 btom/b1.jsp라고 적지 않아야 한다.(servlet-context.xml에서 확인 가능함)
+		return "btom/b1";
 	}
 	
 	/*
-	 * @RequestMapping(value="/b2", method = RequestMethod.GET) 
-	 * public String b2Get() {
-	 * 
-	 * return "btom/b2";
-	 * 
-	 * }
-    }
-	*/
-	
-	
-//	@RequestMapping(value= "/b2", method = RequestMethod.GET)
-//	public String  b2Get(HttpServletRequest request, Model model) {
-//		   String name = request.getParameter("name") == null ? "" : request.getParameter("name");	
-//		   model.addAttribute("name", name);
-//		  
-//		  return "btom/b2";
-//	}	  
-	
-	@RequestMapping(value= "b2k", method = RequestMethod.GET)
-	public String  b2Get() {
+	@RequestMapping(value = "/b2", method = RequestMethod.GET)
+	public String b2Get() {
 		return "btom/b2";
 	}
-	@RequestMapping(value="b2Ok", method = RequestMethod.POST)
-	public String  b2OkGet(String name, 
-			@RequestParam (name="age", defaultValue = "0", required = false) int age,   
+	*/
+	/*
+	@RequestMapping(value = "/b2", method = RequestMethod.GET)
+	public String b2Get(HttpServletRequest request, Model model) {
+		String name = request.getParameter("name")==null ? "" : request.getParameter("name");
+		
+		model.addAttribute("name", name);
+		
+		return "btom/b2";
+	}
+	*/
+	@RequestMapping(value = "/b2", method = RequestMethod.GET)
+	public String b2Get() {
+		return "btom/b2";
+	}
+	
+	@RequestMapping(value = "/b2Ok", method = RequestMethod.POST)
+	public String b2OkGet(String name,
+			@RequestParam(name="age", defaultValue = "0", required = false) int age, 
 			Model model) {
-		//int 타입은 자동형 변환이 일어나지만  자료 형변환이 값이 없을 때(null)는 문제가 됨
-		System.out.println("name : " + name +"age : " + age);
+		System.out.println("name : " + name + " , age : " + age);
 		model.addAttribute("name", name);
 		model.addAttribute("age", age);
-		return "btom/b2";
-
-	}	
-	@RequestMapping(value= "b2k", method = RequestMethod.POST)
-	public String  b2Post(String name, 
-			@RequestParam (name="age", defaultValue = "0", required = false) int age,   
-			Model model) {
-		System.out.println("name : " + name +"age : " + age);
-		model.addAttribute("name", name);
-		model.addAttribute("age", age); 
+		
 		return "btom/b2";
 	}
-
-	@RequestMapping(value="/b2", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/b2", method = RequestMethod.POST)
 	public String b2Post(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		String name= request.getParameter("name")==null? "" : request.getParameter("name"); 
-		int age = request.getParameter("age")==null? 0 : Integer.parseInt(request.getParameter("age"));
-		System.out.println("name : " + name +"age : " + age);
+		
+		String name = request.getParameter("name")==null ? "" : request.getParameter("name");
+		int age = request.getParameter("age")==null ? 0 : Integer.parseInt(request.getParameter("age"));
+		System.out.println("name : " + name + " , age : " + age);
+		
 		model.addAttribute("name", name);
 		model.addAttribute("age", age);
-		return "bton/b2";
+		
+		return "btom/b2";
 	}
-
+	
 	@RequestMapping(value = "/b3", method = RequestMethod.GET)
 	public String b3Get() {
 		return "btom/b3";
@@ -89,9 +78,15 @@ public class BtomController {
 	@RequestMapping(value = "/b3", method = RequestMethod.POST)
 	public String b3Post(Model model, HttpServletRequest request,
 			@RequestParam(name="name", defaultValue = "", required = false) String name,
-			@RequestParam(name="age", defaultValue = "0", required = false) int age
+			@RequestParam(name = "age",  defaultValue = "0",   required = false) int age
+			// int age = request.getParameter("age")==null ? 0 : Integer.parseInt(request.getParameter("age"));
+			// 위 코딩과 뜻이 같다. 
+			// defaultValue = "0", required = false) : defaultValue = "0" 코드 해석 : 기본값을 0으로 줄게
+			// required = false 코드 해석 : 
 			) throws UnsupportedEncodingException {
-		request.setCharacterEncoding("utf-8");
+				// 예외 처리 하는 이유 : filter에서 한글 인코딩이 없다면 값이 들어오기 전에 public String b3Post 즉 시작부분으로 던져서,
+				// 처리한다. (이미 값이 넘어오고 인코딩 처리시에 해당 값은 적용 받지 못해 한글 데이터일 경우 깨져서 들어온다.)
+			request.setCharacterEncoding("utf-8");
 		
     System.out.println("name : " + name + " , age : " + age);
 		
@@ -118,40 +113,47 @@ public class BtomController {
 		
 		return "btom/b4";
 	}
+	
 	@RequestMapping(value = "/b5", method = RequestMethod.GET)
 	public String b5Get() {
 		return "btom/b5";
 	}
+	
 	@RequestMapping(value = "/b5", method = RequestMethod.POST)
 	public String b5Post(Model model,
-		@RequestParam(name="name") String name,
-		@RequestParam(name="age", defaultValue = "0", required = false) int age,
-		@RequestParam(name="mid") String mid,
-		@RequestParam(name="pwd") String pwd,
-		@RequestParam(name="gender") String gender,
-		@RequestParam(name="address") String address
+			@RequestParam(name="name") String name,
+			@RequestParam(name="age", defaultValue = "0", required = false) int age,
+			@RequestParam(name="mid") String mid,
+			@RequestParam(name="pwd") String pwd,
+			@RequestParam(name="gender") String gender,
+			@RequestParam(name="address") String address
 			) {
+		
 		model.addAttribute("name", name);
 		model.addAttribute("age", age);
 		model.addAttribute("mid", mid);
 		model.addAttribute("pwd", pwd);
 		model.addAttribute("gender", gender);
 		model.addAttribute("address", address);
+		
 		return "btom/b5";
 	}
+	
 	@RequestMapping(value = "/b6", method = RequestMethod.GET)
 	public String b6Get() {
 		return "btom/b6";
 	}
+	
 	@RequestMapping(value = "/b6", method = RequestMethod.POST)
 	public String b6Post(Model model,
-		@RequestParam(name="name") String name,
-		@RequestParam(name="age", defaultValue = "0", required = false) int age,
-		@RequestParam(name="mid") String mid,
-		@RequestParam(name="pwd") String pwd,
-		@RequestParam(name="gender") String gender,
-		@RequestParam(name="address") String address
+			@RequestParam(name="name") String name,
+			@RequestParam(name="age", defaultValue = "0", required = false) int age,
+			@RequestParam(name="mid") String mid,
+			@RequestParam(name="pwd") String pwd,
+			@RequestParam(name="gender") String gender,
+			@RequestParam(name="address") String address
 			) {
+		
 //		model.addAttribute("name", name);
 //		model.addAttribute("age", age);
 //		model.addAttribute("mid", mid);
@@ -172,7 +174,7 @@ public class BtomController {
 		
 		return "btom/b6";
 	}
-
+	
 	@RequestMapping(value = "/b7", method = RequestMethod.GET)
 	public String b7Get() {
 		return "btom/b7";
@@ -180,27 +182,25 @@ public class BtomController {
 	
 	@RequestMapping(value = "/b7", method = RequestMethod.POST)
 	public String b7Post(Model model, BTomVO vo) {
-
 //		vo.setName(name);
 //		vo.setAge(age);
 //		vo.setMid(mid);
 //		vo.setPwd(pwd);
 //		vo.setGender(gender);
 //		vo.setAddress(address);
-	
 		
-		System.out.println("vo : " +  vo);
+		System.out.println("vo : " + vo);
+		
 		model.addAttribute("vo", vo);
 		
-		//return "btom/b7";
-		// b7은 spring이 내부적으로 BTomVO vo에 연결		
-
 		return "btom/b7";
-	
+		//return "btom/b7";
+		// b7은 spring이 내부적으로 BTomVO vo에 연결	
 	}
-	
-	@RequestMapping(value="/b8", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/b8", method = RequestMethod.GET)
 	public String b8Get() {
-		return  "btom/b8";
+		return "btom/b8";
 	}
+	
 }
