@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	<!-- annotation을 사용할 수 있게끔 하겠다. -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/images/**" location="/resources/images/" />
+	<!-- * : images 하나만 봄 -->
+	<!-- ** : images 밑에 있는 모든 파일을 다 봄  -->
+	<resources mapping="/board/**" location="/resources/images/board/" />
+	<resources mapping="/pds/**" location="/resources/images/pds/" />
+	<resources mapping="/css/**" location="/resources/images/css/" />
+	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/font/**" location="/resources/font/" />
+	<resources mapping="/test/**" location="/resources/images/test/" />
+	<!-- resources를 mapping시켜주는 선언문 -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<!-- 웹에서 view까지, jsp파일은 무조건 views폴더 밑에 넣어야함 -->
+		<beans:property name="suffix" value=".jsp" />
+		<!-- .jsp까지 -->
+	</beans:bean>
+	
+	<context:component-scan base-package="com.spring.sExam.controller" /> <!-- front Controller로 변경되었음 -->
+	<!-- DispatchServlet이 sExam의 @container를 검색(찾는다) -->
+	
+	
+</beans:beans>
